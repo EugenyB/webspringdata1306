@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Students</title>
+    <link rel="stylesheet" type="text/css" href="/styles.css">
+</head>
+<body>
+    <div class="center">
+        <form action="students/add" method="post">
+            <label for="first_name">First name:</label>
+            <input id="first_name" type="text" name="first_name">
+            <label for="last_name">Last name:</label>
+            <input id="last_name" type="text" name="last_name">
+            <label for="age">Age:</label>
+            <input id="age" type="number" name="age" value="0" max="99" min="0">
+            <label for="faculty">Faculty</label>
+            <select id="faculty" name="faculty_id" required>
+                <option value="">-----</option>
+                <option th:each="f : ${faculties}" th:text="${f.name}" th:value="${f.id}"></option>
+            </select>
+            <button type="submit">Add</button>
+        </form>
+        <table class="student_table">
+            <thead>
+                <tr>
+                    <th>#</th>
+                    <th>First Name</th>
+                    <th>Last Name</th>
+                    <th>Age</th>
+                    <th>Faculty</th>
+                    <th>X</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr th:each="s : ${students}">
+                    <td class="id" th:text="${s.id}"></td>
+                    <td th:text="${s.firstName}"></td>
+                    <td th:text="${s.lastName}"></td>
+                    <td class="number" th:text="${s.age}"></td>
+                    <td th:text="${s.faculty.name}"></td>
+                    <td class="id"><a th:href="@{students/delete(id=${s.id})}">delete</a></td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</body>
+</html>

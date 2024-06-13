@@ -1,0 +1,9 @@
+spring:
+    application:
+        name: webspringdata1306
+    datasource:
+        url: jdbc:postgresql://localhost:5432/webdemo
+        username: postgres
+        password: 123
+    jpa:
+        generate-ddl: true
