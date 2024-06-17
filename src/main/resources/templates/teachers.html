@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Teachers</title>
+    <link rel="stylesheet" type="text/css" href="/styles.css">
+</head>
+<body>
+    <div class="center">
+        <table class="data_table">
+            <thead>
+                <tr>
+                    <th>Name</th>
+                    <th>Exp</th>
+                    <th>Subjects</th>
+                    <th>Delete</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr th:each="t : ${teachers}">
+                    <td th:text="${t.fullName}"></td>
+                    <td th:text="${t.experience}" class="number"></td>
+                    <td><a th:href="@{teachers/show_subjects(tid=${t.id})}" th:text="show"></a></td>
+                    <td><a th:href="@{teachers/delete(tid=${t.id})}" th:text="X"></a></td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</body>
+</html>

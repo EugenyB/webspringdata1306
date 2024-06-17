@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Subjects by teacher</title>
+  <link rel="stylesheet" type="text/css" href="/styles.css">
+</head>
+<body>
+  <div class="center">
+    <h1>Teacher: <span th:text="${teacher.fullName}"></span></h1>
+    <table class="data_table">
+      <thead>
+        <tr>
+          <th>Title</th>
+          <th>Length</th>
+          <th>Delete</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr th:each="s : ${teacher.subjects}">
+          <td th:text="${s.title}"></td>
+          <td th:text="${s.length}" class="number"></td>
+          <td><a th:href="@{/teachers/delete_subject(tid=${teacher.id}, sid=${s.id})}" th:text="remove"></a></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</body>
+</html>

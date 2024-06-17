@@ -4,24 +4,24 @@ div.center {
     margin-right: auto;
 }
 
-table.student_table {
+table.data_table {
     background-color: blue;
     width: 100%;
     margin-top: 10px;
 }
 
-table.student_table td {
+table.data_table td {
     background-color: white;
 }
 
-table.student_table td.number {
+table.data_table td.number {
     text-align: right;
 }
 
-table.student_table td.id {
+table.data_table td.id {
     text-align: center;
 }
 
-table.student_table th {
+table.data_table th {
     background-color: antiquewhite;
 }
