@@ -1,3 +1,8 @@
+body {
+    padding: 5px;
+}
+
+
 div.center {
     width: 75%;
     margin-left: auto;

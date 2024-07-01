@@ -5,6 +5,7 @@ import lombok.Getter;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import ua.mk.berkut.webspringdata1306.data.Teacher;
@@ -44,6 +45,12 @@ public class TeacherController {
     @GetMapping("/delete")
     public String delete(@RequestParam Long tid) {
         teacherService.deleteTeacher(tid);
+        return "redirect:/teachers";
+    }
+
+    @PostMapping("/add_teacher")
+    public String addTeacher(@RequestParam String tname, @RequestParam int texp) {
+        teacherService.addTeacher(tname, texp);
         return "redirect:/teachers";
     }
 }

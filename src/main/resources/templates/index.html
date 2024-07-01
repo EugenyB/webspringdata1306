@@ -1,12 +1,16 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <title>Start page</title>
+    <link rel="stylesheet" th:href="@{/webjars/bootstrap/5.3.3/dist/css/bootstrap.css}">
+    <link rel="stylesheet" th:href="@{/webjars/bootstrap-icons/1.11.3/font/bootstrap-icons.css}">
+    <link rel="stylesheet" href="/styles.css" type="text/css">
 </head>
 <body>
-    <a href="students">Students</a>
-    <a href="faculties">Faculties</a>
-    <a href="teachers">Teachers</a>
+    <a class="btn btn-sm btn-primary" href="students">Students</a>
+    <a class="btn btn-sm btn-secondary" href="faculties">Faculties</a>
+    <a class="btn btn-sm btn-info" href="teachers">Teachers</a>
+    <script th:href="@{/webjars/bootstrap/5.3.3/dist/js/bootstrap.bundle.js}"></script>
 </body>
 </html>

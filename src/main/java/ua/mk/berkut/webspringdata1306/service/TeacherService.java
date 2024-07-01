@@ -34,4 +34,9 @@ public class TeacherService {
     public void deleteTeacher(Long tid) {
         teacherRepository.deleteById(tid);
     }
+
+    public void addTeacher(String tname, int texp) {
+        Teacher teacher = new Teacher(tname, texp);
+        teacherRepository.save(teacher);
+    }
 }
