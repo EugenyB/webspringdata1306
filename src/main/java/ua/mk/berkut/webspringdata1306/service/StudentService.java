@@ -4,6 +4,7 @@ import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 import ua.mk.berkut.webspringdata1306.data.Faculty;
 import ua.mk.berkut.webspringdata1306.data.Student;
+import ua.mk.berkut.webspringdata1306.data.StudentInfo;
 import ua.mk.berkut.webspringdata1306.repository.FacultyRepository;
 import ua.mk.berkut.webspringdata1306.repository.StudentRepository;
 
@@ -31,5 +32,9 @@ public class StudentService {
 
     public void deleteStudentById(Long id) {
         studentRepository.deleteById(id);
+    }
+
+    public List<StudentInfo> findStudentInfo() {
+        return studentRepository.findByIdNotNull();
     }
 }

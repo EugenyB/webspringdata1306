@@ -4,13 +4,12 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
+import ua.mk.berkut.webspringdata1306.data.Subject;
 import ua.mk.berkut.webspringdata1306.data.Teacher;
 import ua.mk.berkut.webspringdata1306.service.TeacherService;
 
+import java.util.List;
 import java.util.Optional;
 
 @Controller
@@ -31,6 +30,8 @@ public class TeacherController {
         Optional<Teacher> optionalTeacher = teacherService.findTeacherById(tid);
         if (optionalTeacher.isPresent()) {
             model.addAttribute("teacher", optionalTeacher.get());
+            List<Subject> subjects = teacherService.findAvailableSubjects(tid);
+            model.addAttribute("available", subjects);
             return "teachers_subjects";
         }
         return "redirect:/teachers";
@@ -52,5 +53,23 @@ public class TeacherController {
     public String addTeacher(@RequestParam String tname, @RequestParam int texp) {
         teacherService.addTeacher(tname, texp);
         return "redirect:/teachers";
+    }
+
+    @PostMapping("/edit")
+    public String editTeacher(@RequestParam String tname, @RequestParam int texp, @RequestParam Long tid) {
+        teacherService.updateTeacher(tid, tname, texp);
+        return "redirect:/teachers";
+    }
+
+    @GetMapping("/subjects/add/{tid}/{sid}")
+    public String addSubject(@PathVariable Long tid, @PathVariable Long sid) {
+        teacherService.addSubject(tid, sid);
+        return "redirect:/teachers/show_subjects?tid="+tid;
+    }
+
+    @GetMapping("/subjects/remove/{tid}/{sid}")
+    public String removeSubject(@PathVariable Long tid, @PathVariable Long sid) {
+        teacherService.removeSubject(tid, sid);
+        return "redirect:/teachers/show_subjects?tid="+tid;
     }
 }

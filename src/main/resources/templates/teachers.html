@@ -29,18 +29,24 @@
                         <a class="btn btn-sm btn-info bi-book" th:href="@{/teachers/show_subjects(tid=${t.id})}">&nbsp;Show</a>
                     </td>
 
-                    <td style="text-align: center;"><a class="btn btn-warning btn-sm bi-pencil" th:href="@{/teachers/edit(tid=${t.id})}"></a> </td>
+                    <td style="text-align: center;">
+<!--                        <a class="btn btn-warning btn-sm bi-pencil" th:href="@{/teachers/edit(tid=${t.id})}"></a> </td>-->
+                        <a class="btn btn-sm btn-warning" data-bs-toggle="modal" data-bs-target="#add_teacher" data-bs-ident="#edit"
+                           th:attr="data-bs-link=@{/teachers/edit}, data-bs-text=${t.fullName}, data-bs-exp=${t.experience}, data-bs-id=${t.id}">
+                            <i class="bi bi-pencil"></i>
+                        </a>
+                    </td>
                     <td style="text-align: center;">
 <!--                        <a class="btn btn-sm btn-danger bi-trash" th:href="@{teachers/delete(tid=${t.id})}"></a>-->
                         <a class="btn btn-sm btn-danger" data-bs-toggle="modal" data-bs-target="#myconfirm"
-                        th:attr="data-bs-link=@{/teachers/delete(tid=${t.id})}, data-bs-text=${t.fullName}, data-bs-id=${t.id}">
+                        th:attr="data-bs-link=@{/teachers/delete(tid=${t.id})}, data-bs-text=${t.fullName}, data-bs-exp=${t.experience}, data-bs-id=${t.id}">
                             <i class="bi bi-trash"></i>
                         </a>
                     </td>
                 </tr>
             </tbody>
         </table>
-        <button class="btn btn-primary btn-sm" data-bs-toggle="modal" data-bs-target="#add_teacher"
+        <button class="btn btn-primary btn-sm" data-bs-toggle="modal" data-bs-target="#add_teacher" data-bs-ident="#add"
                 th:attr="data-bs-link=@{/teachers/add_teacher}"><i class="bi bi-plus"></i> Add teacher</button>
     </div>
 
@@ -55,6 +61,7 @@
                     </div>
                     <div class="modal-body">
                         <label for="t_name">Name:</label>
+                        <input type="hidden" id="t_id" name="tid" value="0"/>
                         <input id="t_name" type="text" name="tname"><br/>
                         <label for="t_exp">Experience:</label>
                         <input id="t_exp" type="number" name="texp">
@@ -93,13 +100,27 @@
         let myEditDialog = document.getElementById('add_teacher')
         myEditDialog.addEventListener('show.bs.modal', function (event) {
             let button = event.relatedTarget
-            let link = button.getAttribute('data-bs-link')
             let dialogTitle = document.getElementById('staticAddLabel')
-            dialogTitle.textContent = 'Add teacher'
             let approveButton = document.getElementById('approve')
-            approveButton.textContent = 'Add Teacher'
             let form = document.getElementById('add_form')
+            let link = button.getAttribute('data-bs-link')
             form.setAttribute("action", link)
+            let nameField = document.getElementById('t_name')
+            let expField = document.getElementById('t_exp')
+            let idField = document.getElementById('t_id')
+
+            if (button.getAttribute('data-bs-ident')==='#add') {
+                dialogTitle.textContent = 'Add teacher'
+                approveButton.textContent = 'Add Teacher'
+                nameField.setAttribute('value', '')
+                expField.setAttribute('value', '0')
+            } else {
+                dialogTitle.textContent = 'Edit teacher'
+                approveButton.textContent = 'Update Teacher'
+                idField.setAttribute('value', button.getAttribute('data-bs-id'))
+                nameField.setAttribute('value', button.getAttribute('data-bs-text'))
+                expField.setAttribute('value', button.getAttribute('data-bs-exp'))
+            }
         })
     </script>
 
